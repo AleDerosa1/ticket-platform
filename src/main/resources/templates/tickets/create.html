@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets Create</title>
+
+    <th:block th:replace="~{ fragments/head :: head }"></th:block>
+
+</head>
+
+<body>
+
+    <header>
+        <nav th:replace="~{ fragments/navbar :: navbar }"></nav>
+    </header>
+
+    <main class="container">
+        <section class="row">
+            <div class="col-12 text-center">
+                <h1 class="fw-bold">
+                    Tickets creation page
+                </h1>
+            </div>
+        </section>
+
+        <section class="ticket-content">
+            <div class="col-12">
+                <h2 class="text-center mb-3">
+                    You are adding a new ticket
+                </h2>
+
+                <div class="col-12">
+                    <form th:action="@{/Tickets}" method="POST" th:object="${ticket}">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title:</label>
+                            <input type="text" class="form-control" id="title" th:field="*{title}"
+                                th:errorClass="is-invalid" required>
+
+                            <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status:</label>
+                            <input type="text" class="form-control" id="status" th:field="*{status}"
+                                th:errorClass="is-invalid" required>
+
+                            <div th:if="${#fields.hasErrors('status')}" class="invalid-feedback">
+                                <ul>
+                                    <li th:each="error : ${#fields.errors('status')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <strong>Select the operator you want to contact:</strong>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Marco
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Alessio
+                            </label>
+                        </div>
+                           <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Veronica
+                            </label>
+                        </div>
+                           <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Davide
+                            </label>
+                        </div>
+
+
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}">
+    </footer>
+
+</body>
+
+</html>
