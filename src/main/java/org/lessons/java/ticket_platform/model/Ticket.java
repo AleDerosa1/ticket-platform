@@ -1,12 +1,14 @@
 package org.lessons.java.ticket_platform.model;
 
+import java.time.LocalDateTime;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -17,15 +19,19 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "The tilte must not be blank, empty or null")
-    @Size(min = 4, message = "Title must contain at least 4 characters")
+    @NotBlank(message = "Il titolo è obbligatorio")
+    @Size(min = 4, message = "Il titolo deve contenere almeno 4 caratteri")
     private String title;
 
-    @NotNull(message = "The status cannot be null")
-    private String status;
+    @NotBlank(message = "La descrizione è obbligatoria")
+    private String description;
 
-    @NotNull(message = "The operator cannot be null")
-    private String operator;
+
+
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
 
 
@@ -45,20 +51,33 @@ public class Ticket {
         this.title = title;
     }
 
-    public String getStatus() {
-        return this.status;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getOperator() {
-        return this.operator;
+  
+
+
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
-    public void setOperator(String operator) {
-        this.operator = operator;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    
 }

@@ -24,7 +24,8 @@ public class TicketController {
     @GetMapping
     public String index(Model model){
         model.addAttribute("tickets", ticketRepository.findAll());
-
+        var list = ticketRepository.findAll();
+        System.out.println("Tickets trovati: " + list.size());
         return "tickets/index";
         
     }
@@ -51,7 +52,33 @@ public class TicketController {
         }
 
         ticketRepository.save(formTicket);
-        return "redirect:/games";
+        return "redirect:/tickets";
+    }
+
+     @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Integer id, Model model){
+        model.addAttribute("ticket", ticketRepository.findById(id).get());
+        return "tickets/edit";
+    }
+
+    //SALVA
+    @PostMapping("/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("ticket") Ticket formTicket, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            return "tickets/edit";
+        }
+
+        ticketRepository.save(formTicket);
+        return "redirect:/tickets";
+    }
+
+ 
+    //CANCELLA
+     @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Integer id){
+        ticketRepository.deleteById(id);
+        return "redirect:/tickets";
     }
 
 

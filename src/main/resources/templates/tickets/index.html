@@ -26,9 +26,66 @@
         </section>
 
         <section class="ticket-content">
-            <h2 class="text-center">
-                Non hai ticket
-            </h2>
+            <div class="col-12">
+                <table class="table table-hover table-striped table-dark" th:if="${#lists.size(tickets) > 0}">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="ticket : ${tickets}" th:object="${ticket}">
+                            <td th:text="*{id}"></td>
+                            <td th:text="*{title}"></td>
+                            
+                            
+                            <td>
+                                <a th:href="@{/tickets/{id}(id=*{id})}" class="btn btn-sm btn-primary">Show</a>
+                                <a th:href="@{/tickets/{id}/edit(id=*{id})}" class="btn btn-sm btn-success">Edit</a>
+                                <!-- * Il BOTTONE che triggera la modale -->
+                                <button type="button" class="d-inline btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    th:data-bs-target="'#delete-modal-' + *{id}">
+                                    Delete
+                                </button>
+
+                                <!-- La modale nascosta che appare solo quando viene cliccato il bottone relativo -->
+                                <div class="modal fade" th:id="'delete-modal-' + *{id}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Deletion of
+                                                    <strong>"[[*{title}]]"</strong>
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    Are you sure that you want to remove
+                                                    <strong>"[[*{title}]]"</strong>, developed by
+                                                    and id: [[*{id}]]
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <form th:action="@{|/tickets/*{id}/delete|}" method="post"
+                                                    class="d-inline">
+                                                    <button type="submit" class="btn btn-danger btn">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
         </section>
     </main>
