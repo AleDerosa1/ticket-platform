@@ -16,10 +16,19 @@
         <nav th:replace="~{ fragments/navbar :: navbar }"></nav>
     </header>
 
-   
+    <main class="container">
+        <section class="upper row">
+            <div class="col-12 text-center">
+                <h1 class="fw-bold">
+                    [[${ticket.title}]]
+                </h1>
+            </div>
+        </section>
+    </main>
 
 
-    
+
+
 
     <footer th:replace="~{fragments/footer :: footer}">
     </footer>

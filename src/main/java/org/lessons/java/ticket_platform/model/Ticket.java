@@ -26,12 +26,14 @@ public class Ticket {
     @NotBlank(message = "La descrizione è obbligatoria")
     private String description;
 
+    private LocalDateTime createdAt;
 
+    private LocalDateTime updatedAt;
 
+    private String notes;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private String operator;
 
-    private LocalDateTime updatedAt = LocalDateTime.now();
 
 
 
@@ -59,10 +61,6 @@ public class Ticket {
         this.description = description;
     }
 
-  
-
-
-
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
@@ -79,5 +77,21 @@ public class Ticket {
         this.updatedAt = updatedAt;
     }
 
+    public String getNotes() {
+        return this.notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getOperator() {
+        return this.operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
     
+
 }

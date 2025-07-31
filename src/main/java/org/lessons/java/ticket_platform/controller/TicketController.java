@@ -24,8 +24,7 @@ public class TicketController {
     @GetMapping
     public String index(Model model){
         model.addAttribute("tickets", ticketRepository.findAll());
-        var list = ticketRepository.findAll();
-        System.out.println("Tickets trovati: " + list.size());
+       
         return "tickets/index";
         
     }
